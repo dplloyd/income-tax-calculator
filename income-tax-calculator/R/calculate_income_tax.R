@@ -47,9 +47,12 @@ calculate_income_tax <-
     }
     
     
-    # Adjustment 2: those earning more than £100,000 will see their Personal Allowance reduced by £1 for every £2 earned over £100,000.
+    # Adjustment 2: those earning more than £100,000 will see their Personal Allowance reduced by £1 for every £2 earned over £100,000. This caps out at 12571, the current personal allowance.
     personal_adjustment_100k <- max(c(0, (annual_income - 100000) / 2))
-    tax_brackets[1] <- tax_brackets[1] + personal_adjustment_100k
+    if (personal_adjustment_100k > 12571) {
+      personal_adjustment_100k <- 12571
+    }
+    tax_brackets[1] <- tax_brackets[1] - personal_adjustment_100k
     
     
     # National Insurance ------------------------------------------------------

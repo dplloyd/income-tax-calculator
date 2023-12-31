@@ -5,6 +5,8 @@ account: diarmuid
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 10857705
-bundleId: 8097266
+bundleId: 8097472
 url: https://diarmuid.shinyapps.io/income-tax-calculator/
 version: 1
+asMultiple: FALSE
+asStatic: FALSE

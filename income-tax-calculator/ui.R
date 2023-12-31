@@ -38,14 +38,17 @@ fluidPage(# Application title
     mainPanel(
       h2("Annual and monthly net salary, deductions and net take home pay"),
       h5(
-        "For the input values entered in the sidebar, this table estimates your net take home pay, and the deduction components."
+        "For the input values entered in the sidebar, these tables estimates your net take home pay, and the deduction components depending on location."
       ),
+      h4("Scotland"),
       reactableOutput("taxTable"),
+      h4("England, Wales and Northern Ireland (rUK)"),
+      reactableOutput("taxTable_rUK"),
       h2(
-        "Annual salaries: Composition of gross pay due to income tax, NI contributions and pension"
+        "Scottish annual salaries: Composition of gross pay due to income tax, NI contributions and pension"
       ),
       h5(
-        "For illustrative purposes, a breakdown of annual deductions and take home pay for different annual salaries"
+        "For illustrative purposes, a breakdown of annual deductions and take home pay for different annual salaries in Scotland"
       ),
       highchartOutput("stackedBarchart")
     )
