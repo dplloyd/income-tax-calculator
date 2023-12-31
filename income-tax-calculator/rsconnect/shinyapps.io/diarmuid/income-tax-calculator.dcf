@@ -1,0 +1,10 @@
+name: income-tax-calculator
+title:
+username: diarmuid
+account: diarmuid
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10857705
+bundleId: 8097266
+url: https://diarmuid.shinyapps.io/income-tax-calculator/
+version: 1

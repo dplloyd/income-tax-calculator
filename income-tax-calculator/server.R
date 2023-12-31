@@ -43,6 +43,16 @@ function(input, output, session) {
     
     })
   
+  tax_salary_range <- reactive({
+    salaries <- seq(0, 150000, 5000)
+    results <-  map_df(salaries, calculate_income_tax, income_tax_selected()$brackets,
+                       income_tax_selected()$rates,
+                       pension = input$pension_contribution,
+                       ni_brackets = nat_ins_selected()$brackets,
+                       ni_rates = nat_ins_selected()$rates) |> pivot_longer(pension_contribution:income_after_tax)
+  })
+  
+  
   output$taxTable <- renderReactable({
   
       reactable::reactable(tax_output_time_period(),
@@ -59,5 +69,23 @@ function(input, output, session) {
   
   })
   
+ output$stackedBarchart <- renderHighchart({
+   hc <- tax_salary_range() %>% 
+     hchart(
+       'column', hcaes(x = 'annual_income', y = 'value', group = 'name'),
+       stacking = "normal"
+     ) |> 
+     
+   hc_yAxis(reversedStacks = FALSE) |> 
+     
+     hc_legend(
+       align = "right",
+       verticalAlign = "top",
+       layout = "vertical",
+       reversed = TRUE)
+   
+     
+ })
   
+   
 }

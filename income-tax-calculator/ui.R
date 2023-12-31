@@ -8,6 +8,7 @@ library(reactable)
 library(tidyverse)
 library(here)
 library(gt)
+library(highcharter)
 
 
 fluidPage(# Application title
@@ -34,5 +35,18 @@ fluidPage(# Application title
       
     ),
     # Show a plot of the generated distribution
-    mainPanel(reactableOutput("taxTable"))
+    mainPanel(
+      h2("Annual and monthly net salary, deductions and net take home pay"),
+      h5(
+        "For the input values entered in the sidebar, this table estimates your net take home pay, and the deduction components."
+      ),
+      reactableOutput("taxTable"),
+      h2(
+        "Annual salaries: Composition of gross pay due to income tax, NI contributions and pension"
+      ),
+      h5(
+        "For illustrative purposes, a breakdown of annual deductions and take home pay for different annual salaries"
+      ),
+      highchartOutput("stackedBarchart")
+    )
   ))

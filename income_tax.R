@@ -19,9 +19,20 @@ rates <- c(0, 0.19, 0.20, 0.21, 0.41, 0.46)
 
 
 
-salaries <- seq(10000, 120000, 100)
-results <-  map_df(salaries, calculate_income_tax, brackets, rates)
+salaries <- seq(10000, 120000, 5000)
+results <-  map_df(salaries, calculate_income_tax, brackets, rates) |> pivot_longer( pension_contribution:income_tax)
 
 
-ggplot(results, aes(annual_income, income_after_tax / 12)) +
-  geom_line()
+ggplot(results, aes(annual_income, value , fill = name)) +
+  geom_col()
+
+library(highcharter)
+
+results$salaries <- as.factor(results$salaries)
+
+hc <- results %>% 
+  hchart(
+    'column', hcaes(x = 'annual_income', y = 'value', group = 'name'),
+    stacking = "normal"
+  )
+hc
