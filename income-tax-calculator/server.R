@@ -11,6 +11,7 @@
 
 function(input, output, session) {
   
+
   # There are a bunch of reactive variables which we'll likely use often
   # so define them outwith the main rendering functions. Note, these are now functions, and 
   # need to be accessed by adding () after them!

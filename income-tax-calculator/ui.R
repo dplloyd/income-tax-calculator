@@ -17,6 +17,7 @@ fluidPage(# Application title
   # Sidebar with a input fields
   sidebarLayout(
     sidebarPanel(
+      p("Enter some basic information about your annual income and deductions:"),
       selectInput("fin_year", "Financial year", c("2024-25", "2023-24")),
       numericInput(
         "annual_salary",
@@ -30,7 +31,9 @@ fluidPage(# Application title
         value = 0.0565,
         min = 0,
         max = 1
-      )
+      ),
+      p("Note, this tool assumes you have a basic tax free allowance, and also applies the reduction in National Insurance announced for 2023-24, which comes into effect from 6th Jan 2024."),
+      
       
       
     ),
@@ -42,6 +45,7 @@ fluidPage(# Application title
       ),
       h4("Scotland"),
       reactableOutput("taxTable"),
+      div(),
       h4("England, Wales and Northern Ireland (rUK)"),
       reactableOutput("taxTable_rUK"),
       h2(
