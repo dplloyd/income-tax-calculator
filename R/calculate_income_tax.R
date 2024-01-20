@@ -16,21 +16,24 @@ calculate_income_tax <-
   function(annual_income,
            tax_brackets,
            rates,
-           ...) {
-    optargs <- list(...)
+           pension = NULL,
+           ni_brackets = NULL,
+           ni_rates = NULL,
+           marriage = NULL) {
+    # optargs <- list(...)
     
     
     # Define optional arguemnts if not passed
-    if (is.null(optargs$pension)) {
+    if (is.null(pension)) {
       pension <- 0
     }
-    if (is.null(optargs$ni_brackets)) {
+    if (is.null(ni_brackets)) {
       ni_brackets <- c(12576, 50268, Inf)
     }
-    if (is.null(optargs$ni_rates)) {
+    if (is.null(ni_rates)) {
       ni_rates <- c(0, 0.12, 0.02)
     }
-    if (is.null(optargs$marriage)) {
+    if (is.null(marriage)) {
       marriage <- FALSE
     }
     
@@ -44,9 +47,12 @@ calculate_income_tax <-
     }
     
     
-    # Adjustment 2: those earning more than £100,000 will see their Personal Allowance reduced by £1 for every £2 earned over £100,000.
+    # Adjustment 2: those earning more than £100,000 will see their Personal Allowance reduced by £1 for every £2 earned over £100,000. This caps out at 12571, the current personal allowance.
     personal_adjustment_100k <- max(c(0, (annual_income - 100000) / 2))
-    tax_brackets[1] <- tax_brackets[1] + personal_adjustment_100k
+    if (personal_adjustment_100k > 12571) {
+      personal_adjustment_100k <- 12571
+    }
+    tax_brackets[1] <- tax_brackets[1] - personal_adjustment_100k
     
     
     # National Insurance ------------------------------------------------------

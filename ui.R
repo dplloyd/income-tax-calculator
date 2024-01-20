@@ -32,7 +32,7 @@ fluidPage(# Application title
         min = 0,
         max = 1
       ),
-      p("Note, this tool assumes you have a basic tax free allowance, and also applies the reduction in National Insurance announced for 2023-24, which comes into effect from 6th Jan 2024."),
+      p("Note, this tool assumes you have the basic tax free allowance, and also applies the reduction in National Insurance announced for 2023-24, which comes into effect from 6th Jan 2024."),
       
       
       
